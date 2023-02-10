@@ -1,99 +1,43 @@
-type Teste = {
+interface Tree {
     id: number,
     label: string,
-    children: Array<Teste>
-  }
-  
-  const s = 'ppp'
+    children: Tree[]
+}
 
-  const tree: Array<Teste>  = [
+const tree: Tree[] = [
     {
-      id: 1,
-      label: 'Teste 1',
-      children: [
-        {
-          id:2,
-          label:'Teste 1 - Filho 1',
-          children: [
+        id:1,
+        label: 'Camada1',
+        children:[
             {
-              id:3,
-              label: 'Teste 1 - Filho 1 - Filho 1',
-              children: []
-            },
-            {
-              id:4,
-              label: 'Teste 1 - Filho 1 - Filho 2',
-              children: []
+                id:2,
+                label: 'Camada2',
+                children: [
+                    {
+                        id:3,
+                        label:'Camada3',
+                        children: []
+                    }
+                ]
             }
-          ]
-        },
-        {
-          id:5,
-          label:'Teste 1 - Filho 2',
-          children: [
-            {
-              id:6,
-              label: 'Teste 1 - Filho 2 - Filho 1',
-              children: []
-            },
-            {
-              id:7,
-              label: 'Teste 1 - Filho 2 - Filho 2',
-              children: []
-            }
-          ]
-        }
-      ]
-    },
-    {
-      id: 8,
-      label: 'Teste 2',
-      children: [
-        {
-          id:9,
-          label:'Teste 2 - Filho 1',
-          children: [
-            {
-              id:10,
-              label: 'Teste 2 - Filho 1 - Filho 1',
-              children: []
-            },
-            {
-              id:11,
-              label: 'Teste 2 - Filho 1 - Filho 2',
-              children: []
-            }
-          ]
-        },
-        {
-          id:13,
-          label:'Teste 2 - Filho 2',
-          children: [
-            {
-              id:14,
-              label: 'Teste 2 - Filho 2 - Filho 1',
-              children: []
-            },
-            {
-              id:15,
-              label: 'Teste 2 - Filho 2 - Filho 2',
-              children: []
-            }
-          ]
-        }
-      ]
+        ]
     }
-  ]
+]
 
-  function find(tree: Array<Teste>, s: string){
-
-    return tree.filter(item => {
-        if(item.label.toLowerCase().includes(s)){
-          return true
-        }else{
-          return find(item.children,s)
+function find(tree: Tree[], s: string){
+    const filtro = tree.filter(item => {
+        if(item.label.toLowerCase.contains(s)){
+            return true
+        }else if(item.children.length>0){
+            const found = find(item.children,s)
+            if(!!found){
+                return true
+            }
         }
-      })
-  }
 
-  console.log(find(tree,s))
+        return false
+    })
+
+
+
+}
